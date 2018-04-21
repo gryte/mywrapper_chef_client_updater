@@ -11,14 +11,9 @@ task :foodcritic do
   sh 'foodcritic . --tags ~FC078'
 end
 
-desc 'Knife upload mywrapper_chef_client_updater cookbook to test environment'
-task :upload_test do
-  sh 'knife cookbook upload -o .. mywrapper_chef_client_updater -E test --force'
-end
-
-desc 'Knife upload mywrapper_chef_client_updater cookbook to prod environment'
-task :upload_prod do
-  sh 'knife cookbook upload -o .. mywrapper_chef_client_updater -E prod'
+desc 'Berks upload mywrapper_chef_client_updater cookbook'
+task :upload do
+  sh 'berks upload'
 end
 
 desc 'Delete testserver node'
@@ -35,6 +30,6 @@ desc 'Remove testserver from chef server'
 task remove_test: [:deletenode_test, :deleteclient_test]
 
 desc 'Bootstrap test server'
-task bootstrap_test: [:upload_test] do
+task bootstrap_test: [:upload] do
   sh 'knife bootstrap 192.168.1.234 -E test -N testserver -r mywrapper_chef_client_updater --sudo --ssh-user test --ssh-password test --use-sudo-password --bootstrap-version 14.0.202'
 end
