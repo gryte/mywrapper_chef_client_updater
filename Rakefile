@@ -1,5 +1,5 @@
 desc 'Define default task'
-task default: [:cookstyle, :foodcritic, :kitchentest]
+task default: [:cookstyle, :foodcritic, :berksupdate, :kitchentest, :berksupload]
 
 desc 'Run cookstyle'
 task :cookstyle do
@@ -11,13 +11,18 @@ task :foodcritic do
   sh 'foodcritic . --tags ~FC078'
 end
 
+desc 'Run berks update in current directory'
+task :berksupdate do
+  sh 'berks update'
+end
+
 desc 'Run kitchen test in current directory'
 task :kitchentest do
   sh 'kitchen test'
 end
 
 desc 'Berks upload mywrapper_chef_client_updater cookbook'
-task :upload do
+task :berksupload do
   sh 'berks upload'
 end
 
