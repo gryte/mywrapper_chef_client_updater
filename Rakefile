@@ -1,5 +1,5 @@
 desc 'Define default task'
-task default: [:cookstyle, :foodcritic]
+task default: [:cookstyle, :foodcritic, :kitchentest]
 
 desc 'Run cookstyle'
 task :cookstyle do
@@ -9,6 +9,11 @@ end
 desc 'Run foodcritic in current directory'
 task :foodcritic do
   sh 'foodcritic . --tags ~FC078'
+end
+
+desc 'Run kitchen test in current directory'
+task :kitchentest do
+  sh 'kitchen test'
 end
 
 desc 'Berks upload mywrapper_chef_client_updater cookbook'
@@ -31,5 +36,5 @@ task remove_test: [:deletenode_test, :deleteclient_test]
 
 desc 'Bootstrap test server'
 task bootstrap_test: [:upload] do
-  sh 'knife bootstrap 192.168.1.234 -E test -N testserver -r mywrapper_chef_client_updater --sudo --ssh-user test --ssh-password test --use-sudo-password --bootstrap-version 14.3.37'
+  sh 'knife bootstrap 192.168.1.234 -N testserver -r mywrapper_chef_client_updater --sudo --ssh-user test --ssh-password test --use-sudo-password --bootstrap-version 14.4.56'
 end
