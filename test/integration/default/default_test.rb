@@ -8,5 +8,5 @@
 # chef client is installed with version 14.0.202
 describe package('chef') do
   it { should be_installed }
-  its('version') { should eq '14.5.33-1.el7' }
+  its('version') { should eq '14.6.47-1.el7' }
 end
