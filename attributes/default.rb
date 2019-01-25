@@ -1,2 +1,2 @@
 # manage chef client
-default['chef_client_updater']['version'] = '14.8.12'
+default['chef_client_updater']['version'] = '14.9.13'
